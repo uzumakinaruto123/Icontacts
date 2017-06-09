@@ -85,9 +85,25 @@ customADD(element,callback) {
 
   save(model: any) {
         let newContacts = model._value.cotactsToAdd;
-        var x = 0;
-        this.loopArray(newContacts,x);
+        if(this.checkIfArrayIsUnique(newContacts)){
+            var x = 0;
+            this.loopArray(newContacts,x);
+        }else{
+            this.cp.showToast("Duplicate contact numbers!",2000,'bottom');
+        }
     }
+
+  checkIfArrayIsUnique(myArray) {
+    const flags = new Set();
+    const newContacts = myArray.filter(entry => {
+        if (flags.has(entry.number)) {
+            return false;
+        }
+        flags.add(entry.number);
+        return true;
+    });
+    return myArray.length === newContacts.length;
+  }
 
   dismiss(){
     this.viewCtrl.dismiss();
