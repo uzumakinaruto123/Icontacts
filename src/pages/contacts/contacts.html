@@ -1,0 +1,62 @@
+<!--
+  Generated template for the Contacts page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar  color="primary">
+    <ion-title>Contacts</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="deleteAll()">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="addContact()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <ion-toolbar  color="primary">
+    <ion-searchbar [(ngModel)]="searchString" (ionInput)="getItems($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list *ngIf="cp.allContacts.length">
+    <ion-item-sliding  *ngFor="let contact of cp.allContacts;let i=index;">
+          <ion-item-options side="left">
+            <button ion-button color="danger" (click)="deleteContact(i)">
+              <ion-icon name="trash"></ion-icon>
+              Delete
+            </button>
+          </ion-item-options>
+          <ion-item>
+            
+            <ion-avatar item-start>
+              <img src="assets/icon/favicon.ico">
+            </ion-avatar>
+            <h2>{{ contact.firstName+' '+contact.lastName }}</h2>
+            <p>{{ contact.number }}</p>
+            
+          </ion-item>
+          <ion-item-options side="right">
+              <button ion-button color="secondary" (click)="updatePrompt(contact,i)">
+                <ion-icon name="create"></ion-icon>
+                Update
+              </button>
+          </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <div *ngIf="!cp.allContacts.length && !searchString.length" class="emptyPlaceholder" text-center>
+    <button type="button" (click)="addContact()" ion-button color="primary" outline text-nowrap>Add your first contact</button>
+  </div>
+
+    <ion-refresher *ngIf="cp.allContacts.length" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+</ion-content>

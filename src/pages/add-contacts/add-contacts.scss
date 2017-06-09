@@ -1,0 +1,24 @@
+page-add-contacts {
+
+    .dividerItem{
+        background-color: #eee;
+    }
+
+    ion-item:first-child .item-inner, ion-item:last-child .item-inner{
+        border-bottom: none !important;
+    }
+
+    ion-item{
+
+        ion-label{
+            overflow:visible !important;
+        }
+    }
+
+    ion-col{
+        button{
+            width: 100%;
+        }
+    }
+
+}
