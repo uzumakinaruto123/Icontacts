@@ -15,8 +15,6 @@ import { ContactsProvider } from '../../providers/contacts-provider';
 })
 export class AddContacts {
 
-  public cotactsToAdd = [{ name : '', number : ''}];
-
   public myForm: FormGroup;
 
   constructor(
